@@ -35,22 +35,31 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                       .setAction("Action", null).show();
 
-
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 imageView.setImageResource(imageIds[imageIndex]);
                 imageIndex++;
                 if (imageIndex >= imageIds.length) {
                     imageIndex = 0;
                 }
+
+
+
             }
         });
+
+
+//        imageButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                imageView.setImageResource(imageIds[imageIndex]);
+//                imageIndex++;
+//                if (imageIndex >= imageIds.length) {
+//                    imageIndex = 0;
+//                }
+//            }
+//        });
 
 
 
