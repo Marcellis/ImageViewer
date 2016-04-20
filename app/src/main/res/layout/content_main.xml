@@ -12,8 +12,27 @@
     tools:context="com.example.marcellis.imageviewer.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+      <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/imageView"
+          android:src="@drawable/image1"
+          android:layout_alignParentTop="true"
+          android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_next"
+        android:id="@+id/imageButton"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/imageView" />
+
 </RelativeLayout>
