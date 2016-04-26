@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Button imageButton;
     ImageView imageView;
     int imageIndex = 1;
+    int currentPic =0 ;
     final int[] imageIds = {R.drawable.image1, R.drawable.image2, R.drawable.image3};
 
     private ListView listView;
@@ -56,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String message;
-                String clickedItem= (String) parent.getItemAtPosition(position);
+                String clickedItem = (String) parent.getItemAtPosition(position);
 
-//                if ( (imageIds[position]) imageView.getDrawable())
-//                 message = "Great";
-//                else
-//                    message = "wrong";
+                if (position == currentPic)
+                    message = "Great";
+                else
+                    message = "wrong";
 
-                Snackbar.make(view, imageView.getDrawable().toString(), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, message+position+currentPic, Snackbar.LENGTH_LONG).show();
 
             }
         });
@@ -73,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 imageView.setImageResource(imageIds[imageIndex]);
+                currentPic = imageIndex;
                 imageIndex++;
-
                 if (imageIndex >= imageIds.length) {
                     imageIndex = 0;
                 }
@@ -82,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
 
 
     @Override
