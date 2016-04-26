@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     final int[] imageIds = {R.drawable.image1, R.drawable.image2, R.drawable.image3};
 
     private ListView listView;
-
 
     private ArrayAdapter<String> adapter;
 
@@ -51,6 +51,24 @@ public class MainActivity extends AppCompatActivity {
 //Set the newly created adapter as the adapter for the listview
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String message;
+                String clickedItem= (String) parent.getItemAtPosition(position);
+
+//                if ( (imageIds[position]) imageView.getDrawable())
+//                 message = "Great";
+//                else
+//                    message = "wrong";
+
+                Snackbar.make(view, imageView.getDrawable().toString(), Snackbar.LENGTH_LONG).show();
+
+            }
+        });
+
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,15 +81,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
