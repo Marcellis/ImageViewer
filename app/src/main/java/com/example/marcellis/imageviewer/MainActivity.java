@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
     Button imageButton;
     ImageView imageView;
     int imageIndex = 1;
-    int currentPic =0 ;
-    final int[] imageIds = {R.drawable.image1, R.drawable.image2, R.drawable.image3};
+    private int currentImageIndex = 0;
+    final int[] imageNames = {R.drawable.image1, R.drawable.image2, R.drawable.image3};
 
     private ListView listView;
 
@@ -57,14 +57,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String message;
-                String clickedItem = (String) parent.getItemAtPosition(position);
 
-                if (position == currentPic)
+                if (position == currentImageIndex)
                     message = "Great";
                 else
                     message = "wrong";
 
-                Snackbar.make(view, message+position+currentPic, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
 
             }
         });
@@ -73,12 +72,15 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.setImageResource(imageIds[imageIndex]);
-                currentPic = imageIndex;
-                imageIndex++;
-                if (imageIndex >= imageIds.length) {
-                    imageIndex = 0;
+
+                currentImageIndex++;
+
+                if (currentImageIndex >= imageNames.length) {
+                    currentImageIndex = 0;
                 }
+                imageView.setImageResource(imageNames[currentImageIndex]);
+
+
             }
         });
 
