@@ -1,33 +1,29 @@
 package com.example.marcellis.imageviewer;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import static android.support.design.widget.Snackbar.make;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button imageButton;
-    ImageView imageView;
-    int imageIndex = 1;
+
     private int currentImageIndex = 0;
-    final int[] imageNames = {R.drawable.image1, R.drawable.image2, R.drawable.image3};
+    private int[] imageNames;
 
-    private ListView listView;
-
-    private ArrayAdapter<String> adapter;
+    private Button mNextButton;
+    private ImageView mImageView;
+    private ListView mListView;
+    private ArrayAdapter<String> mAdapter;
 
 
     @Override
@@ -37,75 +33,41 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        imageButton = (Button) findViewById(R.id.imageButton);
-        imageView = (ImageView) findViewById(R.id.imageView);
-        listView = (ListView) findViewById(R.id.listView);
+        mListView = (ListView) findViewById(R.id.listView);
+        mNextButton = (Button) findViewById(R.id.imageButton);
+        mImageView = (ImageView) findViewById(R.id.imageView);
 
-
-//Create the List of items
+        imageNames = new int[]{R.drawable.image1, R.drawable.image2, R.drawable.image3};
 
         String[] items = getResources().getStringArray(R.array.description_text);
 
-//Create the Array Adapter, give it a layout and a list of values
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        mListView.setAdapter(mAdapter);
 
-//Set the newly created adapter as the adapter for the listview
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String message;
-
-                if (position == currentImageIndex)
+                if (position == currentImageIndex) {
                     message = "Great";
-                else
-                    message = "wrong";
-
-                Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
-
+                } else {
+                    message = "Wrong";
+                }
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
 
-
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 currentImageIndex++;
 
                 if (currentImageIndex >= imageNames.length) {
                     currentImageIndex = 0;
                 }
-                imageView.setImageResource(imageNames[currentImageIndex]);
-
-
+                mImageView.setImageResource(imageNames[currentImageIndex]);
             }
         });
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
